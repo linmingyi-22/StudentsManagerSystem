@@ -26,12 +26,33 @@ int main()
 			system("cls");
 			break;
 		case '6'://查找学生信息
+		{
+			Node* p = FindStudent();
+			if (p != NULL)
+				printf("学号:%d\t姓名:%s\t年龄:%d\t成绩:%d\n", p->stu.stuNum, p->stu.name, p->stu.age, p->stu.score);
+			else
+				printf("查无此人");
+			system("pause");
+			system("cls");
 			break;
+		}
 		case '7'://修改学生信息
+			ModifyStudent();
+			system("pause");
+			system("cls");
 			break;
 		case '8'://删除学生信息
+			DeleteStudent();
+			system("pause");
+			system("cls");
 			break;
 		case '0'://退出系统
+			printf("see you");
+			return 0;
+		default:
+			printf("输入有误，请重新输入\n");
+			system("pause");
+			system("cls");
 			break;
 		}
 	}
@@ -167,4 +188,78 @@ int CountStudent()
 		p = p->pNext;
 	}
 	return nCount;
+}
+//错误
+Node* FindStudent()
+{
+	int nStuNum;
+	char szName[20];
+	printf("请输入要查找学生的学号:\n");
+	scanf_s("%d", &nStuNum);
+	printf("请输入要查找学生的姓名:\n");
+	scanf_s("%s", szName);
+	
+	Node* p = g_pHead;
+	while (p != NULL)
+	{
+		if (p->stu.stuNum==nStuNum || 0==strcmp(p->stu.name,szName))
+			return p;
+		p = p->pNext;
+	}
+	return NULL;
+}
+void ModifyStudent()
+{
+	int nStuNum;
+	printf("请输入需要修改的学生的学号:\n");
+	scanf("%d", &nStuNum);
+	Node* p = g_pHead;
+	while (p != NULL)
+	{
+		if (p->stu.stuNum==nStuNum)
+		{
+			printf("请输入要修改的学生姓名，年龄，成绩:\n");
+			scanf("%s %d %d", p->stu.name, &p->stu.age, &p->stu.score);
+			printf("修改成功\n");
+			break;
+		}
+		p = p->pNext;
+	}
+	if (p==NULL)
+		printf("查无此人\n");
+}
+void DeleteStudent()
+{
+	int nStuNum;
+	printf("请输入要删除的学生的学号:\n");
+	scanf("%d", &nStuNum);
+	Node* p1;
+	if (g_pHead->stu.stuNum== nStuNum)
+	{
+		p1 = g_pHead;
+		g_pHead = g_pHead->pNext;
+		free(p1);
+		return;
+	}
+	Node* p = g_pHead;
+	Node* p2;
+	while (p->pNext!=NULL)
+	{
+		if (p->pNext->stu.stuNum==nStuNum)
+		{
+			p2 = p->pNext;
+			p->pNext = p->pNext->pNext;
+			free(p2);
+			return;
+		}
+		p = p->pNext;
+		if (p->pNext==NULL)
+		{
+			break;
+		}
+	}
+	if (p->pNext==NULL)
+	{
+		printf("查无此人\n");
+	}
 }

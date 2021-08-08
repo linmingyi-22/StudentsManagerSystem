@@ -36,3 +36,9 @@ void SaveStudent();
 void ReadStudent();
 //统计学生人数
 int CountStudent();
+//查找学生
+Node* FindStudent();
+//修改学生信息
+void ModifyStudent();
+//删除学生信息
+void DeleteStudent();
