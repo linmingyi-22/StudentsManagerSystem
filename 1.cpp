@@ -21,6 +21,9 @@ int main()
 			ReadStudent();
 			break;
 		case '5'://统计所有学生人数
+			printf("学生总人数为: %d\n", CountStudent());
+			system("pause");
+			system("cls");
 			break;
 		case '6'://查找学生信息
 			break;
@@ -153,4 +156,15 @@ void ReadStudent()
 	fclose(fp);
 	system("pause");
 	system("cls");
+}
+int CountStudent()
+{
+	int nCount = 0;
+	Node* p = g_pHead;
+	while (p != NULL)
+	{
+		nCount++;
+		p = p->pNext;
+	}
+	return nCount;
 }

@@ -34,3 +34,5 @@ void PrintStudent();
 void SaveStudent();
 //读取学生信息
 void ReadStudent();
+//统计学生人数
+int CountStudent();
